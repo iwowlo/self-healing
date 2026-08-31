@@ -8,3 +8,4 @@ build/
 .scrapy/
 items.jsonl
 *.log
+.env
