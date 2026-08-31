@@ -1,0 +1,37 @@
+{
+  "url": "https://page-perfect-boutique.lovable.app/",
+  "status": 200,
+  "headers": {
+    "Date": [
+      "Mon, 31 Aug 2026 19:04:07 GMT"
+    ],
+    "Content-Type": [
+      "text/html; charset=utf-8"
+    ],
+    "Cache-Control": [
+      "no-cache, must-revalidate, max-age=0"
+    ],
+    "Strict-Transport-Security": [
+      "max-age=31536000; includeSubDomains"
+    ],
+    "Referrer-Policy": [
+      "strict-origin-when-cross-origin"
+    ],
+    "X-Content-Type-Options": [
+      "nosniff"
+    ],
+    "X-Deployment-Id": [
+      "b080b2b0247ff93fe52bf6d466983b1e5e00164d22e7ff190990e3c5ff40cfa4"
+    ],
+    "Set-Cookie": [
+      "__cf_bm=Y1.3QO5nIWN3pHLDnsW_q95k2yqKnMvrK3mZtvuZTog-1788203046.9814243-1.0.1.1-BVA3X4Tl0q6U7vJsc2h_P.yaJlhYAqA34UNq5lI.IRnSqxRAaLN2Es.gC4XQyG25zYybUNym_ALaj9K_rD.Flgb2w8G.aA4V1K.zCQQ0f2NWhRPNASGbVdjSDHR6uLLh; HttpOnly; SameSite=None; Secure; Path=/; Domain=lovable.app; Expires=Mon, 31 Aug 2026 19:34:07 GMT"
+    ],
+    "Server": [
+      "cloudflare"
+    ],
+    "Cf-Ray": [
+      "a33e4c93ac2b2241-WAW"
+    ]
+  },
+  "_encoding": "utf-8"
+}
