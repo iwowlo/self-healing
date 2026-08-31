@@ -1,0 +1,21 @@
+defaults:
+  monitors:
+    - {type: finish_reason, allowed: [finished], severity: error}
+    - {type: ban_ratio, threshold: 0.2, severity: error}
+    - {type: item_count, min: 1, severity: error}
+    - {type: jobs_comparison, threshold: 0.7, number_of_jobs: 5, severity: error}
+spiders:
+  self-healing:
+    monitors:
+      - type: field_coverage
+        severity: error
+        rules:
+          item_name: 0.95
+          price: 0.95
+          rating: 0.95
+          colours: 0.95
+          product_id: 0.95
+          description: 0.95
+          gender: 0.95
+          brand: 0.95
+          sizes: 0.95
