@@ -11,15 +11,15 @@ class ProductPage(WebPage, Returns[ProductItem]):
 
     @field
     def item_name(self) -> Optional[str]:
-        return self.css("h1::text").get()
+        return self.css("h2.product-title::text").get()
 
     @field
     def price(self) -> Optional[str]:
-        return self.css("p.font-display.text-2xl.font-semibold::text").get()
+        return self.css("span.product-price::text").get()
 
     @field
     def rating(self) -> Optional[float]:
-        value = self.css("span.font-semibold.text-foreground::text").get()
+        value = self.css("div.rating-value::text").get()
         if value is None:
             return None
         try:
@@ -29,7 +29,7 @@ class ProductPage(WebPage, Returns[ProductItem]):
 
     @field
     def colours(self) -> Optional[list]:
-        values = self.css("div.mt-2.flex.gap-2 button.rounded-full::attr(aria-label)").getall()
+        values = self.css("div.colour-swatches button::attr(data-colour)").getall()
         return values or None
 
     @field

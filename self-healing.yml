@@ -1,0 +1,60 @@
+# Self-Healing Pipeline Instructions
+#
+# When a monitoring alert fires, the self-healing agent should:
+# 1. Fetch the failed job's items and logs from Scrapy Cloud (project 876217)
+# 2. Diagnose the root cause by comparing failing output against the spec below
+# 3. Fix the relevant page object in page_perfect_boutique_lovable_app/pages/product.py
+# 4. Run the fixture tests (uv run pytest fixtures/ -v) to verify the fix
+# 5. Deploy the fix (uvx shub deploy) and schedule a validation run
+# 6. Open a PR with the fix and close the monitoring issue
+
+project_id: 876217
+spider: self-healing
+repo: iwowlo/self-healing
+
+# Source of truth for what a healthy item looks like
+spec:
+  page_object: page_perfect_boutique_lovable_app/pages/product.py
+  fixture: fixtures/page_perfect_boutique_lovable_app.pages.product.ProductPage/test-1
+  target_url: https://page-perfect-boutique.lovable.app/
+
+# Expected fields and example healthy values (from the first verified run)
+expected_fields:
+  item_name:
+    selector: "h1::text"
+    example: "Fleece Lined Stand Blouson"
+  price:
+    selector: "p.font-display.text-2xl.font-semibold::text"
+    example: "59,90 €"
+  rating:
+    selector: "span.font-semibold.text-foreground::text"
+    example: 4.8
+  colours:
+    selector: "div.mt-2.flex.gap-2 button.rounded-full::attr(aria-label)"
+    example: ["55 FOREST", "31 SAND", "69 MIDNIGHT"]
+  product_id:
+    selector: "p.label-xs.mt-3::text"
+    example: "487517"
+  description:
+    selector: "section.max-w-3xl p.mt-4.text-sm.leading-relaxed.text-muted-foreground::text"
+    example: "A cropped blouson built from a soft, casual-looking nylon..."
+  gender:
+    selector: "p.label-xs.mt-1::text"
+    example: "Unisex"
+  brand:
+    selector: "meta[name=\"author\"]::attr(content)"
+    example: "Nordvik"
+  sizes:
+    selector: "div.flex-wrap button::text"
+    example: ["XXS", "XS", "S", "M", "L", "XL", "XXL"]
+
+# Healing strategy
+healing:
+  # Try fixing selectors first by re-analyzing the live page HTML
+  strategy: reanalyze_and_fix_selectors
+  # If re-analysis fails, fall back to checking whether the page structure changed
+  fallback: report_structural_change
+  # Always run fixture tests before deploying
+  require_passing_tests: true
+  # Deploy and run one validation job before closing the issue
+  require_validation_run: true
