@@ -11,15 +11,16 @@ class ProductPage(WebPage, Returns[ProductItem]):
 
     @field
     def item_name(self) -> Optional[str]:
-        return self.css("h2.product-title::text").get()
+        return self.css("h1::text").get()
 
     @field
     def price(self) -> Optional[str]:
-        return self.css("span.product-price::text").get()
+        return self.css("p.font-display.text-2xl.font-semibold::text").get()
 
     @field
     def rating(self) -> Optional[float]:
-        value = self.css("div.rating-value::text").get()
+        # Rating number sits in the span immediately after the star-icon span
+        value = self.css("span[aria-label$=' stars'] + span::text").get()
         if value is None:
             return None
         try:
@@ -29,7 +30,8 @@ class ProductPage(WebPage, Returns[ProductItem]):
 
     @field
     def colours(self) -> Optional[list]:
-        values = self.css("div.colour-swatches button::attr(data-colour)").getall()
+        # Colour swatches are round buttons identified by aria-label (no data-colour attr)
+        values = self.css("button.size-8.rounded-full::attr(aria-label)").getall()
         return values or None
 
     @field
