@@ -6,7 +6,7 @@ from page_perfect_boutique_lovable_app.pages.product import ProductPage
 
 
 class PagePerfectBoutiqueLovableApp(scrapy.Spider):
-    name = "self-healing"
+    name = "boutique"
     start_urls = ["https://page-perfect-boutique.lovable.app/"]
 
     async def parse(self, response: DummyResponse, nav: NavigationPage):
