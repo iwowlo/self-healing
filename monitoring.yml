@@ -5,7 +5,7 @@ defaults:
     - {type: item_count, min: 1, severity: error}
     - {type: jobs_comparison, threshold: 0.7, number_of_jobs: 5, severity: error}
 spiders:
-  self-healing:
+  boutique:
     monitors:
       - type: field_coverage
         severity: error
